@@ -1,0 +1,24 @@
+{
+  "name": "TP--EspaceMembres",
+  "version": "0.0.1",
+  "homepage": "https://github.com/SteveCarrasco/TP--EspaceMembres",
+  "authors": [
+    "SteveCarrasco <casteve@wanadoo.fr>"
+  ],
+  "description": "TP -Espace membres",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/public/assets",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.1.1",
+    "boilerplate": "*",
+    "normalize-css": "~3.0.1",
+    "modernizr": "~2.8.2"
+  }
+}
