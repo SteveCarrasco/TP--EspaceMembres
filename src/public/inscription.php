@@ -1,9 +1,43 @@
-<?php 
-session_start();
-$login = $_SESSION['login'] ;
+<?php
+
+require_once "dbconnect.php";
+
+if (isset($_POST['inscription']) == 'inscription'){
+
+	echo ' c bon' ;
+
+	if(!empty($_POST['login']) AND !empty($_POST['password'])){
+		$query1 = "SELECT * FROM `users` WHERE login = :login AND password = :password;";
+
+		$PDOStatement = $PDOObject->prepare($query1);
+
+		$PDOStatement->bindParam(':login', $_POST['login'], PDO::PARAM_STR);
+		$PDOStatement->bindParam(':password', $_POST['password'], PDO::PARAM_STR);
+
+		$PDOStatement->execute();
+
+		if ($PDOStatement->rowCount() != 1) {
+			$query2 = "INSERT INTO `users` (`login`,`password`) VALUES (:login, :password);";
 
 
+			$PDOStatement = $PDOObject->prepare($query2);
+
+			$PDOStatement->bindParam(':login', $_POST['login'], PDO::PARAM_STR);
+			$PDOStatement->bindParam(':password', $_POST['password'], PDO::PARAM_STR);
+
+			$PDOStatement->execute();
+			echo 'Bonjour '.$_POST['login'].' Votre compte à bien été créé !';
+			exit;
+		}
+	}else{
+
+		echo 'Compte déja existant !';
+
+	}
+
+}
 ?>
+
 
 <!DOCTYPE html>
 <!--[if IE 8]>    <html class="no-js ie ie8 lt-ie8" lang="en"> <![endif]-->
@@ -12,7 +46,7 @@ $login = $_SESSION['login'] ;
 <head> 
     <meta charset="utf-8"> 
 
-    <title>TP - Espace Membres</title>  
+    <title>TP -Inscription</title>  
 
     <meta name="description" content="Espace Membres"> 
     <meta name="keywords" content=""> 
@@ -66,19 +100,19 @@ $login = $_SESSION['login'] ;
                     <div class="col-md-6 col-md-offset-3">
                         <div class="grid">
                             <div class="col-1">
-                                 <h1 class="title-primary">Espace Membres</h1>
+                                 <h1 class="title-primary">Inscription</h1>
                                  
                             </div>
-                            <form  class="form-signin" role="form" method="post" action="validation_connexion.php">
+                            <form  class="form-signin" role="form" method="post" action="validation_inscription.php">
 		<label for="login">Login : </label>
         <input type="text" class="form-control" placeholder="login" name="login"required/>
         <label for="password">Mot de passe : </label>
         <input type="password" class="form-control" placeholder="Mot de passe" name="password"required/>
         </br>
-        <button class="btn btn-lg btn-success btn-block" type="submit" name="connexion" value="connexion">Se connecter</button>
+        <button class="btn btn-lg btn-success btn-block" type="submit" name="inscription" value="inscription">S'inscrire</button>
         </form>
         </br>
-        <a href="inscription.php">Inscription</a>
+        
         
 
 

@@ -1,9 +1,11 @@
 <?php
 
 // Config database
-$server = "localhost";
+$dsn = "mysql:host=localhost;dbname=membres";
 $username ="admin";
 $password ="0000";
-$database_name ="membres";
+
+
+
 
 ?>
